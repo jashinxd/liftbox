@@ -50,8 +50,10 @@ var app = {
 
 var Latitude = undefined;
 var Longitude = undefined;
-var h2 = document.getElementsByTagName("h2")[0];
+var latlong = document.getElementById("latlong");
+var addr = document.getElementById("address");
 // Get geo coordinates
+var re = /\d{5}/
 
 function getMapLocation() {
     
@@ -65,7 +67,7 @@ var onMapSuccess = function (position) {
     
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
-    h2.innerHTML = "Latitude: " + Latitude + " Longitude: " + Longitude;
+    latlong.innerHTML = "Latitude: " + Latitude + " Longitude: " + Longitude;
     
     //getMap(Latitude, Longitude);
     
@@ -107,9 +109,12 @@ var onMapWatchSuccess = function (position) {
 	
         Latitude = updatedLatitude;
         Longitude = updatedLongitude;
+	latlong.innerHTML = "Latitude: " + Latitude + " Longitude: " + Longitude;
+	ReverseGeocode(Latitude, Longitude);
 	
-        getMap(updatedLatitude, updatedLongitude);
+        //getMap(updatedLatitude, updatedLongitude);
     }
+    //watchMapPosition();
 }
 
 // Error callback
@@ -127,4 +132,26 @@ function watchMapPosition() {
     (onMapWatchSuccess, onMapError, { enableHighAccuracy: true });  
 }
 
-getMapLocation();
+
+//Google Maps API
+function ReverseGeocode(latitude, longitude){
+    var reverseGeocoder = new google.maps.Geocoder();
+    var currentPosition = new google.maps.LatLng(latitude, longitude);
+    
+    reverseGeocoder.geocode({'latLng': currentPosition}, function(results, status) {
+	
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+		var index = results[0].formatted_address.search(re);
+		addr.innerHTML = (results[0].formatted_address.substring(index, index + 5));
+            }
+            else {
+                address.innerHTML('Unable to detect your address.');
+            }
+        } else {
+            address.innerHTML('Unable to detect your address.');
+        }
+    });
+}
+
+watchMapPosition();
