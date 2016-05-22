@@ -63,6 +63,10 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "cnEYGMMo4Kk:APA91bGTCRvDX-flVmbiT0dBnmKOwQKS0quau-1zuW2TJt3aXP_17rNgDUfBzmN4E--7HWiP4RKODvOHUHDb2NdX_CXawWVAy0LRPhuL-ygZTT6_rkquWAvJjRU200TLG-2rJ0H353GO",
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {
