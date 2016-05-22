@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/phonegap/phonegap-app-hello-world/issues"
   },
-  "homepage": "https://github.com/phonegap/phonegap-app-hello-world"
+  "homepage": "https://github.com/phonegap/phonegap-app-hello-world",
+  "dependencies": {
+    "bplist-parser": "~0.1.1",
+    "cordova": "^6.1.1"
+  }
 }
